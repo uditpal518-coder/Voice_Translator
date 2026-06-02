@@ -82,7 +82,7 @@ with col2:
     st.text_area("Translator",value=st.session_state.translated_text,height=150)
     if st.session_state.translated_text:
         try:
-            tts=gtts.gTTS(text=st.session_state.translated_text,target=target_lang)
+            tts=gtts.gTTS(text=st.session_state.translated_text,lang=target_lang)
             fp=io.BytesIO()
             tts.write_to_fp(fp)
             fp.seek(0)
