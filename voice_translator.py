@@ -63,9 +63,6 @@ with col1:
             # st.session_state.translated_text = translator.translate(st.session_state.input_text)
         except Exception as e:
             st.error("your voice not clear Try again!")
-    typed_text=st.text_area("Input Text", value=st.session_state.input_text, height=150)
-    if typed_text != st.session_state.input_text:
-        st.session_state.input_text = typed_text
 
 with col2:
 
