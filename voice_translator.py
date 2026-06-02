@@ -53,16 +53,16 @@ with col1:
     if typed_text != st.session_state.input_text:
         st.session_state.input_text = typed_text
 
-    if st.session_state.input_text:
-        try:
-            target_lang_name = st.selectbox("Select Target Language:", list(LANGUAGES.keys()))
-            target_lang = LANGUAGES[target_lang_name] 
-            translator = GoogleTranslator(source='auto',target=target_lang)
-            st.session_state.translated_text = translator.translate(st.session_state.input_text)
-        except Exception as e:
-            st.session_state.translated_text = "Translation error."
-    else:
-        st.session_state.translated_text = ""
+    # if st.session_state.input_text:
+    #     try:
+    #         target_lang_name = st.selectbox("Select Target Language:", list(LANGUAGES.keys()))
+    #         target_lang = LANGUAGES[target_lang_name] 
+    #         translator = GoogleTranslator(source='auto',target=target_lang)
+    #         st.session_state.translated_text = translator.translate(st.session_state.input_text)
+    #     except Exception as e:
+    #         st.session_state.translated_text = "Translation error."
+    # else:
+    #     st.session_state.translated_text = ""
 with col2:
     st.subheader("Hindi")
     target_lang_name = st.selectbox("Select Target Language:", list(LANGUAGES.keys()))
