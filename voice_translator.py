@@ -68,9 +68,11 @@ with col1:
         st.session_state.input_text = typed_text
 
 with col2:
-    st.subheader(target_lang_name)
+
     target_lang_name = st.selectbox("Select Target Language:", list(LANGUAGES.keys()))
     target_lang = LANGUAGES[target_lang_name] 
+    
+    st.subheader(target_lang_name)
     st.write("")
     if st.session_state.input_text:
         try:
