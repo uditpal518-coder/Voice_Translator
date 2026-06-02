@@ -22,20 +22,20 @@ with col1:
         recording_color="#e81416", 
         neutral_color="#6aa36f"
     )
-    if audio_bytes:
-        r=sr.Recognizer()
-        audio_file = io.BytesIO(audio_bytes)
-        st.text('say something...')
-        r.adjust_for_ambient_noise(mic, duration=1)
-        try:
-            with sr.AudioFile(audio_file) as source:
-                audio_data = r.record(source)
-                st.session_state.input_text = r.recognize_google(audio)
-    
-            # translator=GoogleTranslator(source='auto',target='hi')
-            # st.session_state.translated_text = translator.translate(st.session_state.input_text)
-        except Exception as e:
-            st.error("your voice not clear Try again!")
+        if audio_bytes:
+            r=sr.Recognizer()
+            audio_file = io.BytesIO(audio_bytes)
+            st.text('say something...')
+            r.adjust_for_ambient_noise(mic, duration=1)
+            try:
+                with sr.AudioFile(audio_file) as source:
+                    audio_data = r.record(source)
+                    st.session_state.input_text = r.recognize_google(audio)
+        
+                # translator=GoogleTranslator(source='auto',target='hi')
+                # st.session_state.translated_text = translator.translate(st.session_state.input_text)
+            except Exception as e:
+                st.error("your voice not clear Try again!")
     typed_text=st.text_area("Input Text", value=st.session_state.input_text, height=150)
     if typed_text != st.session_state.input_text:
         st.session_state.input_text = typed_text
