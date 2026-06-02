@@ -8,6 +8,18 @@ from audio_recorder_streamlit import audio_recorder
 
 st.set_page_config(page_title='AI_Translator',page_icon='🎤',layout='wide')
 st.title("Voice Translator")
+
+INPUT_LANGUAGES = {
+    "English": "en-US",
+    "Hindi": "hi-IN",
+    "Marathi": "mr-IN",
+    "Gujarati": "gu-IN",
+    "Bengali": "bn-IN",
+    "Tamil": "ta-IN",
+    "Telugu": "te-IN",
+    "Spanish": "es-ES",
+    "French": "fr-FR"
+}
 LANGUAGES = {
     "Hindi": "hi",
     "Spanish": "es",
@@ -30,7 +42,9 @@ if "translated_text" not in st.session_state:
     st.session_state.translated_text = ""
 col1,col2 = st.columns(2)
 with col1:
-    st.subheader("English")
+    target_lang_name = st.selectbox("Select Target Language:", list(INPUT_LANGUAGES.keys()))
+    input_lang = LANGUAGES[target_lang_name] 
+    st.subheader(target_lang_name)
     audio_bytes = audio_recorder(
     text="Click to record", 
     recording_color="#e81416", 
@@ -43,7 +57,7 @@ with col1:
         try:
             with sr.AudioFile(audio_file) as source:
                 audio_data = r.record(source)
-                st.session_state.input_text = r.recognize_google(audio_data)
+                st.session_state.input_text = r.recognize_google(audio_data, language=input_lang)
     
             # translator=GoogleTranslator(source='auto',target='hi')
             # st.session_state.translated_text = translator.translate(st.session_state.input_text)
