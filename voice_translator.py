@@ -25,7 +25,7 @@ with col1:
         r=sr.Recognizer()
         audio_file = io.BytesIO(audio_bytes)
         st.text('say something...')
-        r.adjust_for_ambient_noise(audio_bytes, duration=1)
+        #r.adjust_for_ambient_noise(audio_bytes, duration=1)
         try:
             with sr.AudioFile(audio_file) as source:
                 audio_data = r.record(source)
