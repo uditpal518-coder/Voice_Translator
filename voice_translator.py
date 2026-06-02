@@ -8,7 +8,7 @@ from audio_recorder_streamlit import audio_recorder
 
 st.set_page_config(page_title='AI_Translator',page_icon='🎤',layout='wide')
 st.title("Voice Translator")
-ANGUAGES = {
+LANGUAGES = {
     "Hindi": "hi",
     "Spanish": "es",
     "French": "fr",
