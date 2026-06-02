@@ -24,12 +24,12 @@ with col1:
     if audio_bytes:
         r=sr.Recognizer()
         audio_file = io.BytesIO(audio_bytes)
-        st.text('say something...')
+       st.text('Processing audio...')
         #r.adjust_for_ambient_noise(audio_bytes, duration=1)
         try:
             with sr.AudioFile(audio_file) as source:
                 audio_data = r.record(source)
-                st.session_state.input_text = r.recognize_google(audio)
+                st.session_state.input_text = r.recognize_google(audio_data)
     
             # translator=GoogleTranslator(source='auto',target='hi')
             # st.session_state.translated_text = translator.translate(st.session_state.input_text)
