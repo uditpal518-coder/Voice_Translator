@@ -1,5 +1,5 @@
 SpeechRecognition
 deep-translator
 gTTS
-PyAudio
 streamlit
+audio-recorder-streamlit
