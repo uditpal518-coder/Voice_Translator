@@ -58,8 +58,8 @@ with col2:
             fp=io.BytesIO()
             tts.write_to_fp(fp)
             fp.seek(0)
-            audio_bytes=fp.read()
-            b64_audio=base64.b64encode(audio_bytes).decode()
+            audio_byte=fp.read()
+            b64_audio=base64.b64encode(audio_byte).decode()
 
            
 
