@@ -58,27 +58,8 @@ with col2:
             tts.write_to_fp(fp)
             fp.seek(0)
             audio_byte=fp.read()
-            b64_audio=base64.b64encode(audio_byte).decode()
 
-           
-
-            audio_html=f"""
-                <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
-                    <button onclick="document.getElementById('hindi_audio').play()" 
-                            style="background: none; border: none; font-size: 28px; cursor: pointer; padding: 0; line-height: 1;">
-                        🔊
-                    </button>
-                    <span style="font-size: 14px; color: #888; user-select: none;">
-                        Click icon to replay
-                    </span>
-                    <audio id="hindi_audio" autoplay="true" style="display: none;">
-                        <source src="data:audio/mp3;base64,{b64_audio}" type="audio/mp3">
-                    </audio>
-                </div>
-            """
-            st.markdown(audio_html, unsafe_allow_html=True)
-
-            #st.audio(fp,format='audio/mp3')
+            st.audio(fp, format='audio/mpeg', autoplay=True)
         except Exception as e:
             st.error(f"Audio display error : {e}")
     
