@@ -8,6 +8,21 @@ from audio_recorder_streamlit import audio_recorder
 
 st.set_page_config(page_title='AI_Translator',page_icon='🎤',layout='wide')
 st.title("Voice Translator")
+ANGUAGES = {
+    "Hindi": "hi",
+    "Spanish": "es",
+    "French": "fr",
+    "German": "de",
+    "Japanese": "ja",
+    "Arabic": "ar",
+    "Bengali": "bn",
+    "Gujarati": "gu",
+    "Marathi": "mr",
+    "Tamil": "ta",
+    "Telugu": "te",
+    "Urdu": "ur",
+    "English": "en"
+}
 
 if "input_text" not in st.session_state:
     st.session_state.input_text = ""
@@ -25,7 +40,7 @@ with col1:
         r=sr.Recognizer()
         audio_file = io.BytesIO(audio_bytes)
         st.text('Processing audio...')
-        #r.adjust_for_ambient_noise(audio_bytes, duration=1)
+        r.adjust_for_ambient_noise(audio_bytes, duration=1)
         try:
             with sr.AudioFile(audio_file) as source:
                 audio_data = r.record(source)
@@ -41,7 +56,9 @@ with col1:
 
     if st.session_state.input_text:
         try:
-            translator = GoogleTranslator(source='auto',target='hi')
+            target_lang_name = st.selectbox("Select Target Language:", list(LANGUAGES.keys()))
+            target_lang = LANGUAGES[target_lang_name] 
+            translator = GoogleTranslator(source='auto',target=target_lang)
             st.session_state.translated_text = translator.translate(st.session_state.input_text)
         except Exception as e:
             st.session_state.translated_text = "Translation error."
@@ -49,11 +66,13 @@ with col1:
         st.session_state.translated_text = ""
 with col2:
     st.subheader("Hindi")
+    target_lang_name = st.selectbox("Select Target Language:", list(LANGUAGES.keys()))
+    target_lang = LANGUAGES[target_lang_name] 
     st.write("")
     st.text_area("Translator",value=st.session_state.translated_text,height=150)
     if st.session_state.translated_text:
         try:
-            tts=gtts.gTTS(text=st.session_state.translated_text,lang='hi')
+            tts=gtts.gTTS(text=st.session_state.translated_text,lang=target_lang)
             fp=io.BytesIO()
             tts.write_to_fp(fp)
             fp.seek(0)
